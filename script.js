@@ -1,16 +1,35 @@
 "use strict";
 
-// * items in book library:
-// * TITLE
-// * AUTHOR
-// * FORMAT (paperback, digital etc.)
-// * PAGES
-// * READ
-
 function updateDisplay() {
     theLibrary.forEach((book) => {
-        titleColumn.textContent = book.title;
+        titleColumnText += `<p>${book.title}</p>`;
+        titleColumn.innerHTML = titleColumnText;
+
+        authorColumnText += `<p>${book.author}</p>`;
+        authorColumn.innerHTML = authorColumnText;
+
+        formatColumnText += `<p>${book.format}</p>`;
+        formatColumn.innerHTML = formatColumnText;
+
+        pagesColumnText += `<p>${book.pages}</p>`;
+        pagesColumn.innerHTML = pagesColumnText;
+
+        readColumnText += `<p>${book.read ? "yes" : "no"}</p>`;
+        isReadColumn.innerHTML = readColumnText;
+
+        indexColumnText += `<p>${book.index}</p>`;
+        indexColumn.innerHTML = indexColumnText;
+
+        editColumnText += `<div class="edit-button"><p>?</p></div>`;
+        editColumn.innerHTML = editColumnText;
     });
+    titleColumnText = "";
+    authorColumnText = "";
+    formatColumnText = "";
+    pagesColumnText = "";
+    readColumnText = "";
+    indexColumnText = "";
+    editColumnText = "";
 }
 
 function Book(index, title, author, format, pages, read) {
@@ -29,6 +48,7 @@ const addNewBook = () => {
     bookFormat = prompt("Format?");
     bookPages = prompt("Pages?");
     bookIsRead = prompt("Read? (y/n)");
+    bookIsRead === "y" ? (bookIsRead = true) : (bookIsRead = false);
 
     const book = new Book(
         indexNumber,
@@ -39,7 +59,6 @@ const addNewBook = () => {
         bookIsRead
     );
     theLibrary.push(book);
-    console.log(theLibrary);
     indexNumber++;
     updateDisplay();
 };
@@ -48,9 +67,10 @@ let theLibrary = [
     {
         index: 1,
         title: "Pale Fire",
-        author: "V. V. Nabokov",
+        author: "Vladimir Nabokov",
         format: "paperback",
         pages: "300",
+        read: true,
     },
     {
         index: 2,
@@ -58,6 +78,7 @@ let theLibrary = [
         author: "Miscellaneous",
         format: "paperback",
         pages: "1000",
+        read: false,
     },
     {
         index: 3,
@@ -65,6 +86,7 @@ let theLibrary = [
         author: "Jed McKenna",
         format: "audio",
         pages: "n/a",
+        read: true,
     },
 ];
 let bookTitle;
@@ -73,6 +95,13 @@ let bookFormat;
 let bookPages;
 let bookIsRead;
 let indexNumber = 4;
+let titleColumnText = "";
+let authorColumnText = "";
+let formatColumnText = "";
+let pagesColumnText = "";
+let readColumnText = "";
+let indexColumnText = "";
+let editColumnText = "";
 
 const newBookBtn = document.querySelector(".new-book-btn");
 
@@ -81,10 +110,14 @@ newBookBtn.addEventListener("click", addNewBook);
 // const newBookForm = document.querySelector(".new-book-input");
 
 const titleColumn = document.querySelector(".title-column");
-const authorColumn = document.querySelector(".book-author");
-const formatColumn = document.querySelector(".book-format");
-const pagesColumn = document.querySelector(".book-pages");
-const isReadColumn = document.querySelector(".book-read");
+const authorColumn = document.querySelector(".author-column");
+const formatColumn = document.querySelector(".format-column");
+const pagesColumn = document.querySelector(".pages-column");
+const isReadColumn = document.querySelector(".read-column");
+const indexColumn = document.querySelector(".index-column");
+const editColumn = document.querySelector(".edit-column");
+
+updateDisplay();
 
 // function addBookToLibrary() {
 //     // stuff

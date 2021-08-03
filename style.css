@@ -6,7 +6,7 @@
 
 body {
     font-family: "Gentium Book Basic", serif;
-    background-color: rgb(41, 41, 35);
+    background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
 }
 
@@ -14,9 +14,16 @@ body {
     display: flex;
     flex-direction: row;
     margin: 3rem;
-    border: 1px green solid;
+    background: rgb(25, 25, 32);
+    /* background: linear-gradient(
+        150deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(46, 45, 50, 1) 35%,
+        rgba(0, 212, 255, 1) 100%
+    ); */
     height: 90vh;
     width: 90vw;
+    border-radius: 20px;
 }
 
 .new-book-input {
@@ -32,20 +39,46 @@ body {
 }
 
 .book-title {
+    font-size: 1.6rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.book-title,
+.title-column {
     width: 15rem;
-    border: red 1px solid;
+    /* border: red 1px solid; */
 }
-.book-author {
-    width: 8rem;
+.book-author,
+.author-column {
+    width: 12rem;
 }
-.book-format {
+.book-format,
+.format-column {
     width: 10rem;
 }
-.book-pages {
+.book-pages,
+.pages-column {
     width: 6rem;
+    /* border: green 1px solid; */
 }
-.book-read {
+.book-read,
+.read-column {
     width: 5rem;
+}
+
+.book-index,
+.index-column {
+    width: 2rem;
+    /* font-size: 1.1rem; */
+}
+.edit-book,
+.edit-column {
+    width: 2rem;
+    font-size: 1.1rem;
 }
 
 .new-book-btn {
@@ -66,4 +99,19 @@ h2 {
     margin: 10px;
     text-align: center;
     background-color: teal;
+}
+
+.col {
+    text-align: center;
+    margin: 10px;
+}
+
+.edit-button {
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    background-color: rgb(24, 74, 83);
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-align: center;
 }
