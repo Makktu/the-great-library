@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.new-book-input {
+    border: 1px red solid;
+    height: 30rem;
+    width: 20rem;
+    opacity: 0;
+}
+
+.new-btn {
+    /* stuff */
+}
