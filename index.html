@@ -8,14 +8,71 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>THE LIBRARY OF TODAY</title>
+        <title>THE GREAT LIBRARY</title>
     </head>
     <body>
         <div class="container">
-            <button class="new-book-btn">NEW BOOK</button>
-            <div class="new-book-input">
-                <input type="text" />
+            <button class="new-book-btn">NEW BOOK</button><br /><br />
+
+            <div class="new-book-form" id="modal">
+                <div class="new-content">
+                    <div class="new-close">X</div>
+                    <p>NEW BOOK</p>
+                    <input
+                        type="text"
+                        class="title"
+                        placeholder="BOOK TITLE"
+                    /><br />
+                    <input
+                        type="text"
+                        class="author"
+                        placeholder="AUTHOR"
+                    /><br />
+
+                    <!-- <div>
+                        <input type="radio" id="huey" name="drone" value="huey"
+                               checked>
+                        <label for="huey">Huey</label>
+                      </div> -->
+
+                    <input
+                        type="radio"
+                        id="print"
+                        name="format"
+                        value="Print"
+                        checked
+                    />
+                    <label for="print">Print</label>
+                    <input
+                        type="radio"
+                        id="digital"
+                        name="format"
+                        value="Digital"
+                    />
+                    <label for="digital">Digital</label>
+                    <input
+                        type="radio"
+                        id="audio"
+                        name="format"
+                        value="Audio"
+                    />
+                    <label for="audio">Audio</label>
+                    <br />
+                    <input
+                        type="text"
+                        class="pages"
+                        placeholder="PAGES"
+                    /><br />
+                    <input
+                        type="radio"
+                        class="is-read"
+                        placeholder="READ"
+                    /><br />
+                    <!-- <input type="text" class="title" placeholder="BOOK TITLE"> -->
+                </div>
             </div>
+            <h1>THE GREAT LIBRARY</h1>
+
             <div class="main-display">
                 <div class="category">
                     <h2 class="book-title">TITLE</h2>
@@ -29,6 +86,7 @@
                     <h2 class="book-read">READ</h2>
 
                     <h2 class="book-index">INDEX</h2>
+
                     <h2 class="edit-book">EDIT</h2>
                 </div>
 

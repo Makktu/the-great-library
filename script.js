@@ -42,13 +42,13 @@ function Book(index, title, author, format, pages, read) {
 }
 
 const addNewBook = () => {
-    // newBookForm.style.cssText = "opacity: 1; transition: 1s ease";
-    bookTitle = prompt("Title?");
-    bookAuthor = prompt("Author?");
-    bookFormat = prompt("Format?");
-    bookPages = prompt("Pages?");
-    bookIsRead = prompt("Read? (y/n)");
-    bookIsRead === "y" ? (bookIsRead = true) : (bookIsRead = false);
+    newBookForm.style.display = "block";
+    // bookTitle = prompt("Title?");
+    // bookAuthor = prompt("Author?");
+    // bookFormat = prompt("Format?");
+    // bookPages = prompt("Pages?");
+    // bookIsRead = prompt("Read? (y/n)");
+    // bookIsRead === "y" ? (bookIsRead = true) : (bookIsRead = false);
 
     const book = new Book(
         indexNumber,
@@ -107,7 +107,16 @@ const newBookBtn = document.querySelector(".new-book-btn");
 
 newBookBtn.addEventListener("click", addNewBook);
 
-// const newBookForm = document.querySelector(".new-book-input");
+const newBookForm = document.querySelector(".new-book-form");
+const newBookClose = document.querySelector(".new-close");
+
+newBookClose.addEventListener("click", () => {
+    newBookForm.style.display = "none";
+});
+
+window.onclick = function (e) {
+    if (e.target === newBookForm) newBookForm.style.display = "none";
+};
 
 const titleColumn = document.querySelector(".title-column");
 const authorColumn = document.querySelector(".author-column");
@@ -118,7 +127,3 @@ const indexColumn = document.querySelector(".index-column");
 const editColumn = document.querySelector(".edit-column");
 
 updateDisplay();
-
-// function addBookToLibrary() {
-//     // stuff
-// }
