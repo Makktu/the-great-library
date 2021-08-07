@@ -1,5 +1,16 @@
 "use strict";
 
+function editThis() {
+    foundIt = e.target.className;
+    foundIt = foundIt.substring(16);
+    // * OK – grabbed the correct Index number – now match to the book!
+    // theLibrary.forEach(index => {
+
+    //     if (index.index === foundIt) {
+    //     // ??? what
+    //     }
+}
+
 function submitClicked(e) {
     e.preventDefault();
     bookTitle = document.querySelector(".title").value;
@@ -59,23 +70,23 @@ function updateDisplay() {
         indexColumnText += `<p>${book.index}</p>`;
         indexColumn.innerHTML = indexColumnText;
 
-        editColumnText += `<p div class="edit-button">X</p>`;
+        editColumnText += `<p class="edit-button edit${book.index}">X</p>`;
         editColumn.innerHTML = editColumnText;
-        const editBtns = document.querySelectorAll(".edit-button");
-        // * HERE – how to grab the correct book?!
-        editBtns.forEach((button) => {
-            button.addEventListener("click", () => console.log(this.book));
-        });
-        // editBtn.addEventListener("click", () => console.log("Clicked!"));
+
+        titleColumnText = "";
+        authorColumnText = "";
+        formatColumnText = "";
+        pagesColumnText = "";
+        readColumnText = "";
+        indexColumnText = "";
+        editColumnText = "";
+        // addNewBook();
     });
-    titleColumnText = "";
-    authorColumnText = "";
-    formatColumnText = "";
-    pagesColumnText = "";
-    readColumnText = "";
-    indexColumnText = "";
-    editColumnText = "";
-    // addNewBook();
+    const editBtns = document.querySelectorAll(".edit-button");
+    // * HERE – how to grab the correct book?!
+    editBtns.forEach((button) => {
+        button.addEventListener("click", editThis);
+    });
 }
 
 function Book(index, title, author, format, pages, read) {
@@ -122,6 +133,7 @@ let bookAuthor;
 let bookFormat;
 let bookPages;
 let bookIsRead;
+let foundIt;
 let indexNumber = 4;
 let titleColumnText = "";
 let authorColumnText = "";

@@ -137,7 +137,6 @@ button {
 .edit-book,
 .edit-column {
     width: 4rem;
-    border: 1px yellow solid;
 }
 
 .new-book-btn {
@@ -163,7 +162,6 @@ h2 {
 .col {
     text-align: center;
     margin: 10px;
-    border: red 1px solid;
 }
 
 .edit-button {
