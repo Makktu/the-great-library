@@ -1,5 +1,44 @@
 "use strict";
 
+function submitClicked(e) {
+    e.preventDefault();
+    bookTitle = document.querySelector(".title").value;
+    bookAuthor = document.querySelector(".author").value;
+    bookFormat = document.querySelector("input[name='format']:checked").value;
+    bookPages = document.querySelector(".pages").value;
+    bookIsRead = document.querySelector("input[name='read-yet']:checked").value;
+    bookIsRead === "y" ? (bookIsRead = true) : (bookIsRead = false);
+
+    if (bookTitle && bookAuthor && bookFormat && bookPages && bookIsRead) {
+        const book = new Book(
+            indexNumber,
+            bookTitle,
+            bookAuthor,
+            bookFormat,
+            bookPages,
+            bookIsRead
+        );
+        theLibrary.push(book);
+        indexNumber++;
+        bookTitle = "";
+        bookAuthor = "";
+        bookFormat = "";
+        bookPages = "";
+        bookIsRead = "";
+        document.getElementById("the-form").reset();
+
+        updateDisplay();
+    } else {
+        messageArea.textContent = "Not a complete entry!";
+        document.getElementById("wrong-form").play();
+    }
+}
+
+function cancelClicked() {
+    messageArea.textContent = "";
+    document.getElementById("the-form").reset();
+}
+
 function updateDisplay() {
     theLibrary.forEach((book) => {
         titleColumnText += `<p>${book.title}</p>`;
@@ -30,6 +69,7 @@ function updateDisplay() {
     readColumnText = "";
     indexColumnText = "";
     editColumnText = "";
+    addNewBook();
 }
 
 function Book(index, title, author, format, pages, read) {
@@ -43,24 +83,6 @@ function Book(index, title, author, format, pages, read) {
 
 const addNewBook = () => {
     newBookForm.style.display = "block";
-    // bookTitle = prompt("Title?");
-    // bookAuthor = prompt("Author?");
-    // bookFormat = prompt("Format?");
-    // bookPages = prompt("Pages?");
-    // bookIsRead = prompt("Read? (y/n)");
-    // bookIsRead === "y" ? (bookIsRead = true) : (bookIsRead = false);
-
-    const book = new Book(
-        indexNumber,
-        bookTitle,
-        bookAuthor,
-        bookFormat,
-        bookPages,
-        bookIsRead
-    );
-    theLibrary.push(book);
-    indexNumber++;
-    updateDisplay();
 };
 
 let theLibrary = [
@@ -117,6 +139,14 @@ newBookClose.addEventListener("click", () => {
 window.onclick = function (e) {
     if (e.target === newBookForm) newBookForm.style.display = "none";
 };
+
+const submitBtn = document.querySelector(".submit-btn");
+const cancelBtn = document.querySelector(".cancel-btn");
+
+submitBtn.addEventListener("click", submitClicked);
+cancelBtn.addEventListener("click", cancelClicked);
+
+const messageArea = document.querySelector(".message-area");
 
 const titleColumn = document.querySelector(".title-column");
 const authorColumn = document.querySelector(".author-column");

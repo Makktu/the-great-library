@@ -32,10 +32,10 @@ body {
     z-index: 1;
     left: 5vw;
     top: 10vh;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     /* overflow: auto; */
-    height: 30rem;
+    height: 50rem;
     width: 20rem;
 }
 
@@ -44,23 +44,33 @@ body {
     /* padding: 2px; */
     border: 5px rgb(197, 214, 197) solid;
     width: 20rem;
-    height: 20rem;
+    height: 29rem;
     background-color: rgb(26, 24, 23);
     color: rgb(245, 239, 239);
     font-size: 1.2rem;
 }
 
 .new-content input,
-label {
+label,
+button {
     font-size: 1.4rem;
     /* margin-top: 5px; */
     margin-top: 15px;
     display: inline;
-    /* margin-left: ; */
+    /* margin-left: 10px; */
+}
+
+.new-content p {
+    margin-top: 12px;
 }
 
 label {
     font-size: 1.3rem;
+}
+
+button {
+    width: 110px;
+    margin-left: 5px;
 }
 
 .new-close {
@@ -76,7 +86,8 @@ label {
 
 .new-close:hover,
 .new-close:focus {
-    color: white;
+    color: black;
+    background-color: whitesmoke;
     text-decoration: none;
     cursor: pointer;
 }
@@ -162,4 +173,22 @@ h2 {
     font-size: 0.9rem;
     text-align: center;
     color: black;
+}
+
+.submit-btn {
+    background-color: rgb(187, 241, 104);
+    cursor: pointer;
+}
+.submit-btn:hover,
+.cancel-btn:hover {
+    background-color: whitesmoke;
+}
+
+.cancel-btn {
+    background-color: rgb(245, 110, 110);
+    cursor: pointer;
+}
+
+.message-area {
+    font-size: 0.7rem;
 }
