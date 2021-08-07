@@ -30,13 +30,13 @@ function submitClicked(e) {
         updateDisplay();
     } else {
         messageArea.textContent = "Not a complete entry!";
-        document.getElementById("wrong-form").play();
+        document.getElementById("wrong-form").play(); // plays the Family Fortunes (UK) our survey said: '0' sound effect
     }
 }
 
 function cancelClicked() {
     messageArea.textContent = "";
-    document.getElementById("the-form").reset();
+    // document.getElementById("the-form").reset();
 }
 
 function updateDisplay() {
@@ -59,8 +59,14 @@ function updateDisplay() {
         indexColumnText += `<p>${book.index}</p>`;
         indexColumn.innerHTML = indexColumnText;
 
-        editColumnText += `<div class="edit-button"><p>?</p></div>`;
+        editColumnText += `<p div class="edit-button">X</p>`;
         editColumn.innerHTML = editColumnText;
+        const editBtns = document.querySelectorAll(".edit-button");
+        // * HERE – how to grab the correct book?!
+        editBtns.forEach((button) => {
+            button.addEventListener("click", () => console.log(this.book));
+        });
+        // editBtn.addEventListener("click", () => console.log("Clicked!"));
     });
     titleColumnText = "";
     authorColumnText = "";
@@ -69,7 +75,7 @@ function updateDisplay() {
     readColumnText = "";
     indexColumnText = "";
     editColumnText = "";
-    addNewBook();
+    // addNewBook();
 }
 
 function Book(index, title, author, format, pages, read) {
