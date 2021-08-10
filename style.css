@@ -93,8 +93,7 @@ button {
 }
 
 .main-display {
-    /* display: flex;
-    flex-direction: row; */
+    margin-left: 16rem;
 }
 
 .book-title {
@@ -141,6 +140,7 @@ button {
 
 .new-book-btn {
     height: 2.5rem;
+    width: 8rem;
     border-radius: 10px;
     font-size: 1.15rem;
     cursor: pointer;

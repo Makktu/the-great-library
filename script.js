@@ -1,14 +1,68 @@
 "use strict";
 
-function editThis() {
+function editThis(e) {
     foundIt = e.target.className;
     foundIt = foundIt.substring(16);
     // * OK – grabbed the correct Index number – now match to the book!
-    // theLibrary.forEach(index => {
+    const bookEdited = theLibrary[foundIt - 1];
 
-    //     if (index.index === foundIt) {
-    //     // ??? what
-    //     }
+    newBookForm.style.display = "block";
+
+    // * below is what I need to work with to fulfil this part of the project
+    document.querySelector(".title").value = bookEdited.title;
+    document.querySelector(".author").value = bookEdited.author;
+    document.querySelector(".radio-section-1").innerHTML = `<input
+    type="radio"
+    id="print"
+    name="format"
+    value="Print"
+    ${bookEdited.format === "Print" ? "checked" : null}
+/>
+<label for="print">Print</label>
+<input
+    type="radio"
+    id="digital"
+    name="format"
+    value="Digital"
+    ${bookEdited.format === "Digital" ? "checked" : null}
+
+/>
+<label for="digital">Digital</label>
+<input
+    type="radio"
+    id="audio"
+    name="format"
+    value="Audio"
+    ${bookEdited.format === "Audio" ? "checked" : null}
+
+/>
+<label for="audio">Audio</label>
+<br />`;
+    document.querySelector(".pages").value = bookEdited.pages;
+    document.querySelector(".radio-section-2").innerHTML = `<input
+    type="radio"
+    class="been-read"
+    id="been-read"
+    name="read-yet"
+    value="y"
+    ${bookEdited.read ? "checked" : null}
+
+/>
+<label for="been-read">Yes</label>
+
+<br />
+<input
+    type="radio"
+    class="not-read"
+    id="not-read"
+    name="read-yet"
+    value="n"
+    ${!bookEdited.read ? "checked" : null}
+/>
+<label for="not-read">No</label>
+
+<br />`;
+    editEntry = true;
 }
 
 function submitClicked(e) {
@@ -20,7 +74,31 @@ function submitClicked(e) {
     bookIsRead = document.querySelector("input[name='read-yet']:checked").value;
     bookIsRead === "y" ? (bookIsRead = true) : (bookIsRead = false);
 
-    if (bookTitle && bookAuthor && bookFormat && bookPages && bookIsRead) {
+    if (editEntry) {
+        if (bookTitle && bookAuthor && bookPages) {
+            theLibrary[foundIt - 1].title = bookTitle;
+            theLibrary[foundIt - 1].author = bookAuthor;
+            theLibrary[foundIt - 1].format = bookIsRead;
+            theLibrary[foundIt - 1].pages = bookPages;
+            theLibrary[foundIt - 1].read = bookIsRead;
+            bookTitle = "";
+            bookAuthor = "";
+            bookFormat = "";
+            bookPages = "";
+            bookIsRead = "";
+            document.getElementById("the-form").reset();
+
+            updateDisplay();
+        } else {
+            messageArea.textContent = "Not a complete entry!";
+            document.getElementById("wrong-form").play(); // plays the Family Fortunes (UK) our survey said: '0' sound effect
+        }
+
+        editEntry = false;
+        return;
+    }
+
+    if (bookTitle && bookAuthor && bookPages) {
         const book = new Book(
             indexNumber,
             bookTitle,
@@ -45,12 +123,36 @@ function submitClicked(e) {
     }
 }
 
-function cancelClicked() {
+function cancelClicked(e) {
+    e.preventDefault();
+    editEntry = false;
     messageArea.textContent = "";
-    // document.getElementById("the-form").reset();
+    document.querySelector(".title").value = "";
+    document.querySelector(".author").value = "";
+    // document.querySelector(".title") = "";
+    document.querySelector(".pages").value = "";
+    // document.querySelector(".title") = "";
 }
 
 function updateDisplay() {
+    if (editEntry) {
+        theLibrary[foundIt].title = document.querySelector(".title").value;
+        theLibrary[foundIt].author = document.querySelector(".author").value;
+        theLibrary[foundIt].format = document.querySelector(
+            "input[name='format']:checked"
+        ).value;
+        theLibrary[foundIt].pages = document.querySelector(".pages").value;
+        bookIsRead = document.querySelector(
+            "input[name='read-yet']:checked"
+        ).value;
+        bookIsRead === "y"
+            ? (theLibrary[foundIt].read = true)
+            : (theLibrary[foundIt].read = false);
+
+        editEntry = false;
+        updateDisplay();
+    }
+
     theLibrary.forEach((book) => {
         titleColumnText += `<p>${book.title}</p>`;
         titleColumn.innerHTML = titleColumnText;
@@ -72,20 +174,20 @@ function updateDisplay() {
 
         editColumnText += `<p class="edit-button edit${book.index}">X</p>`;
         editColumn.innerHTML = editColumnText;
-
-        titleColumnText = "";
-        authorColumnText = "";
-        formatColumnText = "";
-        pagesColumnText = "";
-        readColumnText = "";
-        indexColumnText = "";
-        editColumnText = "";
-        // addNewBook();
     });
+    titleColumnText = "";
+    authorColumnText = "";
+    formatColumnText = "";
+    pagesColumnText = "";
+    readColumnText = "";
+    indexColumnText = "";
+    editColumnText = "";
     const editBtns = document.querySelectorAll(".edit-button");
     // * HERE – how to grab the correct book?!
     editBtns.forEach((button) => {
-        button.addEventListener("click", editThis);
+        button.addEventListener("click", (e) => {
+            editThis(e);
+        });
     });
 }
 
@@ -107,7 +209,7 @@ let theLibrary = [
         index: 1,
         title: "Pale Fire",
         author: "Vladimir Nabokov",
-        format: "paperback",
+        format: "Print",
         pages: "300",
         read: true,
     },
@@ -115,7 +217,7 @@ let theLibrary = [
         index: 2,
         title: "The Bible",
         author: "Miscellaneous",
-        format: "paperback",
+        format: "Print",
         pages: "1000",
         read: false,
     },
@@ -123,7 +225,7 @@ let theLibrary = [
         index: 3,
         title: "Dreamstate",
         author: "Jed McKenna",
-        format: "audio",
+        format: "Audio",
         pages: "n/a",
         read: true,
     },
@@ -134,6 +236,7 @@ let bookFormat;
 let bookPages;
 let bookIsRead;
 let foundIt;
+let editEntry = false;
 let indexNumber = 4;
 let titleColumnText = "";
 let authorColumnText = "";
@@ -162,7 +265,9 @@ const submitBtn = document.querySelector(".submit-btn");
 const cancelBtn = document.querySelector(".cancel-btn");
 
 submitBtn.addEventListener("click", submitClicked);
-cancelBtn.addEventListener("click", cancelClicked);
+cancelBtn.addEventListener("click", (e) => {
+    cancelClicked(e);
+});
 
 const messageArea = document.querySelector(".message-area");
 
